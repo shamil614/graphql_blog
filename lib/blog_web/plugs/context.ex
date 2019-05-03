@@ -29,10 +29,10 @@ defmodule BlogWeb.Plugs.Context do
   defp authorize(token) do
     User
     |> where(token: ^token)
-    |> Repo.one
+    |> Repo.one()
     |> case do
-         nil -> {:error, "invalid authorization token"}
-         user -> {:ok, user}
-       end
+      nil -> {:error, "invalid authorization token"}
+      user -> {:ok, user}
+    end
   end
 end

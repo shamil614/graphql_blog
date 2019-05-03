@@ -14,8 +14,7 @@ defmodule BlogWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json, Absinthe.Plug.Parser],
     pass: ["*/*"],
-    json_decoder: Jason
-    #json_decoder: Phoenix.json_library()
+    json_decoder: Phoenix.json_library()
 
   plug(BlogWeb.Router)
 end

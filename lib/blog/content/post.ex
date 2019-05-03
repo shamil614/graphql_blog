@@ -8,6 +8,7 @@ defmodule Blog.Content.Post do
     field :body, :string
     field :title, :string
     field :published_at, :naive_datetime
+    field :private_notes, :string
 
     belongs_to :author, User
 
@@ -17,7 +18,7 @@ defmodule Blog.Content.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :published_at, :author_id])
+    |> cast(attrs, [:title, :body, :published_at, :author_id, :private_notes])
     |> validate_required([:title, :body, :author_id])
   end
 end

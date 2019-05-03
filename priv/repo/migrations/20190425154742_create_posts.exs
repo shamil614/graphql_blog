@@ -7,6 +7,7 @@ defmodule Blog.Repo.Migrations.CreatePosts do
       add :body, :string
       add :published_at, :naive_datetime
       add :author_id, references(:users), null: false
+      add :private_notes, :string
 
       timestamps()
     end
