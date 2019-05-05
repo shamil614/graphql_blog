@@ -11,6 +11,7 @@ defmodule BlogWeb.Plugs.Context do
 
   def call(conn, _) do
     context = build_context(conn)
+    # Absinthe.Plug calls Absinthe.run() with the options added to the `conn`.
     Absinthe.Plug.put_options(conn, context: context)
   end
 
@@ -26,6 +27,7 @@ defmodule BlogWeb.Plugs.Context do
     end
   end
 
+  # Note this is a simple token auth strategy. This is should not be used in production.
   defp authorize(token) do
     User
     |> where(token: ^token)

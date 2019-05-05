@@ -11,6 +11,7 @@ defmodule BlogWeb.Schema do
   query do
     @desc "Get all posts"
     field :posts, list_of(:post) do
+      # the third argument passed is the `context` set via `plug`
       resolve(&Resolvers.Content.list_posts/3)
     end
 

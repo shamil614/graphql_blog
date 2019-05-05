@@ -12,17 +12,18 @@ defmodule BlogWeb.Resolvers.Content do
   end
 
   @doc """
-  Resolve Posts associated to a User
+  Resolve Posts associated to a User, posts independent of a User and Unauthorized Users
   """
   def list_posts(%User{} = author, args, %{context: %{current_user: current_user}}) do
     {:ok, Content.list_posts_by_author(args, author, current_user)}
   end
 
-  @doc """
-  Resolve Posts.
-  """
   def list_posts(_parent, args, %{context: %{current_user: current_user}}) do
     {:ok, Content.list_posts(args, current_user)}
+  end
+
+  def list_posts(_, _, _) do
+    {:error, "Access denied"}
   end
 
   def create_post(_parent, args, %{context: %{current_user: current_user}}) do

@@ -9,9 +9,11 @@ defmodule BlogWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: BlogWeb.Schema,
-      json_codec: Phoenix.json_library()
+    if Mix.env == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL,
+        schema: BlogWeb.Schema,
+        json_codec: Phoenix.json_library()
+    end
 
     forward "/", Absinthe.Plug, schema: BlogWeb.Schema
   end
